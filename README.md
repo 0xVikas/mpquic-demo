@@ -10,14 +10,14 @@ Install latest version of Golang
 > Replace the hardcoded url "quic.clemente.io" at quic-go/internal/handshake/crypto_setup_client.go in mp-quic project
 
 
- - Using the example server from quic-go with mp-quic:
+ - To run the server:
   ```
-  Generate the necessary pem files and then replace them with the existing ones at ~/go/src/github.com/lucas-clemente/quic-go/example/.
-  $ cd ~/go/src/github.com/lucas-clemente/quic-go
-  $ go run example/main.go -www "path to folder with files to serve"
+  Generate the necessary pem files and then replace them with the existing ones at ./assets/certificates
+  $ cd ~/go/src/github.com/0xVikas/mpquic-demo
+  $ go run server.go
   ```
-  - On the client side,
+  - To run the proxy client:
   ```
-  cd ~/go/src/github.com/0xVikas/mpquic-client
-  go run client.go
+  $ cd ~/go/src/github.com/0xVikas/mpquic-demo
+  $ go run client.go
   ```
