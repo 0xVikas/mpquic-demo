@@ -29,8 +29,8 @@ func handlers() *mux.Router {
 	router.HandleFunc("/", indexPage).Methods("GET")
 	router.HandleFunc("/media/{mId:[0-9]+}/stream/", streamHandler).Methods("GET")
 	router.HandleFunc("/media/{mId:[0-9]+}/stream/{segName:index[0-9]+.ts}", streamHandler).Methods("GET")
-	fs := http.FileServer(http.Dir("./static/"))
-	router.PathPrefix("/static/").Handler(http.StripPrefix("/assets/", fs))
+	fs := http.FileServer(http.Dir("./assets/"))
+	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", fs))
 	return router
 }
 
