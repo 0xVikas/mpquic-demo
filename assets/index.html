@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <!-- Or if you want a more recent canary version -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/hls.js@canary"></script> -->
+  <video id="video"></video>
+  <script type="text/javascript">
+    var video = document.getElementById("video");
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource("http://localhost:1337/media/1/stream/");
+      hls.attachMedia(video);
+      hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        video.play();
+      });
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      video.src = "http://localhost:1337/media/1/stream/";
+      video.addEventListener("loadedmetadata", function () {
+        video.play();
+      });
+    }
+  </script>
+</html>
