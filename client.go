@@ -65,6 +65,7 @@ func init(){
 
 func main() {
 
+	fmt.Println("Started the client on : localhost:1337")
 	http.ListenAndServe("0.0.0.0:1337", nil)
 
 }
