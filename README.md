@@ -7,7 +7,7 @@ MPQUIC Setup instructions: https://multipath-quic.org/2017/12/09/artifacts-avail
 Install latest version of Golang
 
 - Required changes/fixes:
-> Replace the hardcoded url "quic.clemente.io" at quic-go/internal/handshake/crypto_setup_client.go in mp-quic project
+> Replace the hardcoded url "quic.clemente.io" at quic-go/internal/handshake/crypto_setup_client.go in mp-quic project with h.hostname
 
 
  - To run the server:
