@@ -36,6 +36,7 @@ func handlers() *mux.Router {
 
 func indexPage(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, "./assets/index.html")
+	w.Header().Set("Cache-Control", "public, max-age=0")
 }
 
 func streamHandler(response http.ResponseWriter, request *http.Request) {
@@ -66,12 +67,14 @@ func serveHlsM3u8(w http.ResponseWriter, r *http.Request, mediaBase, m3u8Name st
 	mediaFile := fmt.Sprintf("%s/hls/%s", mediaBase, m3u8Name)
 	http.ServeFile(w, r, mediaFile)
 	w.Header().Set("Content-Type", "application/x-mpegURL")
+	w.Header().Set("Cache-Control", "public, max-age=10")
 }
 
 func serveHlsTs(w http.ResponseWriter, r *http.Request, mediaBase, segName string) {
 	mediaFile := fmt.Sprintf("%s/hls/%s", mediaBase, segName)
 	http.ServeFile(w, r, mediaFile)
 	w.Header().Set("Content-Type", "video/MP2T")
+	w.Header().Set("Cache-Control", "public, max-age=10")
 }
 
 func main() {
