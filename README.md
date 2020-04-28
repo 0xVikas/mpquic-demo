@@ -9,7 +9,11 @@ Install latest version of Golang
 - Required changes/fixes:
 > Replace the hardcoded url "quic.clemente.io" at quic-go/internal/handshake/crypto_setup_client.go in mp-quic project with h.hostname
 
-
+ - Setup:
+  ```
+  Clone this repository inside the quic-go project:
+  $ git clone https://github.com/0xVikas/mpquic-demo
+  ```
  - To run the server:
   ```
   Generate the necessary pem files and then replace them with the existing ones at ./assets/certificates
