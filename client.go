@@ -3,8 +3,11 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
+	"bytes"
+	"github.com/0xVikas/mpquic-demo/internal/utils"
 
 	quic "github.com/lucas-clemente/quic-go"
 
@@ -45,6 +48,9 @@ func init(){
 			Transport: &h2quic.RoundTripper{QuicConfig: quicConfig},
 		}
 
+		utils.SetLogLevel(utils.LogLevelInfo)
+		utils.SetLogTimeFormat("")
+
 		addr := "https://localhost:6121" + r.URL.Path
 
 		rsp, err := hclient.Get(addr)
@@ -56,6 +62,12 @@ func init(){
 
 		if err != nil {
 			fmt.Printf("error reading body while handling /echo: %s\n", err.Error())
+		}
+
+		body2 := &bytes.Buffer{}
+		_, err = io.Copy(body2, rsp.Body)
+		if err != nil {
+			panic(err)
 		}
 
 		w.Write(body)

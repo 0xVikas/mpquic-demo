@@ -9,6 +9,7 @@ import (
 
 	_ "net/http/pprof"
 
+	"github.com/lucas-clemente/quic-go/internal/utils"
 	"github.com/lucas-clemente/quic-go/h2quic"
 	"github.com/gorilla/mux"
 )
@@ -83,6 +84,9 @@ func main() {
 	certFile := certDir+"/fullchain.pem"
 	keyFile := certDir+"/privkey.pem"
 
+	utils.SetLogLevel(utils.LogLevelInfo)
+	utils.SetLogTimeFormat("")
+	
 	http.Handle("/", handlers())
 
 	bs := binds{"0.0.0.0:6121"}
