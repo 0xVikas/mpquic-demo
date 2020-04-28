@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 	"bytes"
-	"github.com/lucas-clemente/internal/utils"
+	"github.com/lucas-clemente/quic-go/internal/utils"
 
 	quic "github.com/lucas-clemente/quic-go"
 
