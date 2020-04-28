@@ -97,6 +97,7 @@ func main() {
 		bCap := b
 		go func() {
 			var err error
+			fmt.Println("Started serving at "+b)
 			err = h2quic.ListenAndServeQUIC(bCap, certFile, keyFile, nil)
 			if err != nil {
 				fmt.Println(err)

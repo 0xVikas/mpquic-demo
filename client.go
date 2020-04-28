@@ -5,14 +5,17 @@ import (
 	"io/ioutil"
 	"io"
 	"net/http"
+	"os"
 	"strings"
 	"bytes"
-	"github.com/0xVikas/mpquic-demo/internal/utils"
+	"github.com/lucas-clemente/internal/utils"
 
 	quic "github.com/lucas-clemente/quic-go"
 
 	"github.com/lucas-clemente/quic-go/h2quic"
 )
+
+var serverAddr="https://localhost:6121"
 
 // Function for printing the HTTP Request
 func formatRequest(r *http.Request) string {
@@ -50,8 +53,7 @@ func init(){
 
 		utils.SetLogLevel(utils.LogLevelInfo)
 		utils.SetLogTimeFormat("")
-
-		addr := "https://localhost:6121" + r.URL.Path
+		addr := serverAddr + r.URL.Path
 
 		rsp, err := hclient.Get(addr)
 		if err != nil {
@@ -76,7 +78,13 @@ func init(){
 }
 
 func main() {
-
+	if(len(os.Args)==2){
+		if(os.Args[1][:5]!="http"){
+			serverAddr="https://"+os.Args[1];
+		}else{
+			serverAddr=os.Args[1]
+		}
+	}
 	fmt.Println("Started the client on : localhost:1337")
 	http.ListenAndServe("0.0.0.0:1337", nil)
 
